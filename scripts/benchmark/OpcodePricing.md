@@ -258,7 +258,7 @@ We use a similar approach to profile array operations. As shown below, there is 
 We profile tensor-based operations using a similar approach. To ensure that they do not depend on the dimension of the tensor, we tested the following dimensions independently: 2, 3 and 4.
 
 ### <a name="table8">Table 8</a>: Least-squares linear fit parameters for tensor-based opcodes
-| Benchmark (100 reps)   |   Slope (ns/char) |   Intercept (ns) |    Mean (ns) |   Std error (ns) | Net opcodes                                                                   |
+| Benchmark (100 reps)   |   Slope (ns/element) |   Intercept (ns) |    Mean (ns) |   Std error (ns) | Net opcodes                                                                   |
 |------------------------|-------------------|------------------|--------------|------------------|-------------------------------------------------------------------------------|
 | FromStrTensor_3        |            72.117 |          658.957 | 21459495.574 |          814.668 | [8, 6, 422]                                                                   |
 | FromStrTensor_2        |            71.999 |          665.464 | 27505233.436 |          822.809 | [8, 6, 422]                                                                   |
