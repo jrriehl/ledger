@@ -110,3 +110,32 @@ def opcode_time_table(optimes, optype, opcode_defs):
         return tabulate(table, headers=headers, floatfmt=".2f", tablefmt=tablefmt)
     else:
         return ''
+
+
+def opcode_charges_hpp(optimes, opcode_defs):
+
+    import re
+    from numpy import ceil
+    
+    def convert(name):
+        s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).upper()
+    
+    optimes_fixed64 = optimes['Base'].copy()
+    optimes_fixed64.update(optimes['Fixed64'])
+    
+    min_charge = 1
+    #charges = max(optimes_fixed64[op]*nano2micro, min_charge)
+    bm_opcharges = {op : str(max(int(ceil(optimes_fixed64[op])), min_charge))
+                    for op in optimes_fixed64}
+
+    varname = {op : 'CHARGE_' + convert(opcode_defs[op]) for op in opcode_defs}
+    
+    opcharges = {op: 'DEFAULT_STATIC_CHARGE' for op in opcode_defs}
+    opcharges.update(bm_opcharges)    
+    
+    opcode_charges = ['static const ChargeAmount ' + varname[op] + ' = ' + opcharges[op] + ';' 
+                      for op in opcode_defs if op <= 103]
+
+    return opcode_charges
+

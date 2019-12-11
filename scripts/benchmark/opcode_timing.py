@@ -23,7 +23,7 @@ output_path = 'results/' + date.today().strftime("%Y-%m-%d") + '/'
 n_reps = 100
 
 # Benchmark categories to run
-bm_filter = 'Basic|Prim|Math|Object|Array|Tensor|Crypto'
+bm_filter = 'Basic|Prim|Math'
 
 run_benchmarks = True
 make_plots = True
@@ -273,6 +273,10 @@ if make_tables:
 
     for optype in optimes:
         print('\n' + vmt.opcode_time_table(optimes, optype, opcode_defs))
+    
+    opcode_charges = vmt.opcode_charges_hpp(optimes, opcode_defs)
+    for line in opcode_charges:
+        print(line)
 
 if make_plots:
 
