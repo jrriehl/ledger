@@ -22,7 +22,7 @@ namespace vm {
 
 namespace OpcodeCharges {
 
-static const ChargeAmount DEFAULT_OBJECT_CHARGE = 0;
+static const ChargeAmount DEFAULT_OBJECT_CHARGE = 1000;
 static const ChargeAmount DEFAULT_STATIC_CHARGE = 100;
 
 static const ChargeAmount CHARGE_LOCAL_VARIABLE_DECLARE                    = 8;
@@ -30,7 +30,7 @@ static const ChargeAmount CHARGE_LOCAL_VARIABLE_DECLARE_ASSIGN             = 9;
 static const ChargeAmount CHARGE_PUSH_NULL                                 = 6;
 static const ChargeAmount CHARGE_PUSH_FALSE                                = 6;
 static const ChargeAmount CHARGE_PUSH_TRUE                                 = 6;
-static const ChargeAmount CHARGE_PUSH_STRING                               = DEFAULT_STATIC_CHARGE;
+static const ChargeAmount CHARGE_PUSH_STRING                               = DEFAULT_OBJECT_CHARGE;
 static const ChargeAmount CHARGE_PUSH_CONSTANT                             = 12;
 static const ChargeAmount CHARGE_PUSH_LOCAL_VARIABLE                       = 5;
 static const ChargeAmount CHARGE_POP_TO_LOCAL_VARIABLE                     = 8;
@@ -84,9 +84,9 @@ static const ChargeAmount CHARGE_OBJECT_SUBTRACT                           = DEF
 static const ChargeAmount CHARGE_OBJECT_LEFT_SUBTRACT                      = DEFAULT_OBJECT_CHARGE;
 static const ChargeAmount CHARGE_OBJECT_RIGHT_SUBTRACT                     = DEFAULT_OBJECT_CHARGE;
 static const ChargeAmount CHARGE_LOCAL_VARIABLE_PRIMITIVE_INPLACE_SUBTRACT = 10;
-static const ChargeAmount CHARGE_LOCAL_VARIABLE_OBJECT_INPLACE_SUBTRACT    = DEFAULT_STATIC_CHARGE;
+static const ChargeAmount CHARGE_LOCAL_VARIABLE_OBJECT_INPLACE_SUBTRACT    = DEFAULT_OBJECT_CHARGE;
 static const ChargeAmount CHARGE_LOCAL_VARIABLE_OBJECT_INPLACE_RIGHT_SUBTRACT =
-    DEFAULT_STATIC_CHARGE;
+    DEFAULT_OBJECT_CHARGE;
 static const ChargeAmount CHARGE_PRIMITIVE_MULTIPLY                        = 13;
 static const ChargeAmount CHARGE_OBJECT_MULTIPLY                           = DEFAULT_OBJECT_CHARGE;
 static const ChargeAmount CHARGE_OBJECT_LEFT_MULTIPLY                      = DEFAULT_OBJECT_CHARGE;
