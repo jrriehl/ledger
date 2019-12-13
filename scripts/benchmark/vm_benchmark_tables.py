@@ -121,17 +121,24 @@ def opcode_charges_hpp(optimes, opcode_defs):
         s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).upper()
     
-    optimes_fixed64 = optimes['Base'].copy()
-    optimes_fixed64.update(optimes['Fixed64'])
+    optimes_final = optimes['Base'].copy()
+    optimes_final.update(optimes['Int64'])
+    optimes_final.update(optimes['Fixed64'])
     
     min_charge = 1
-    #charges = max(optimes_fixed64[op]*nano2micro, min_charge)
-    bm_opcharges = {op : str(max(int(ceil(optimes_fixed64[op])), min_charge))
-                    for op in optimes_fixed64}
+    bm_opcharges = {op : str(max(int(ceil(optimes_final[op])), min_charge))
+                    for op in optimes_final}
 
     varname = {op : 'CHARGE_' + convert(opcode_defs[op]) for op in opcode_defs}
     
     opcharges = {op: 'DEFAULT_STATIC_CHARGE' for op in opcode_defs}
+    for op in opcharges:
+        if 'Object' in opcode_defs[op] or 'String' in opcode_defs[op]:
+            opcharges[op] = 'DEFAULT_OBJECT_CHARGE'
+        elif op in bm_opcharges and 'Jump' not in opcode_defs[op]:
+            opcharges[op] = bm_opcharges[op]
+    
+    
     opcharges.update(bm_opcharges)    
     
     opcode_charges = ['static const ChargeAmount ' + varname[op] + ' = ' + opcharges[op] + ';' 
