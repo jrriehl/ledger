@@ -81,15 +81,15 @@ Let *A* be a matrix where each row corresponds to a benchmark and each element *
 
 For the benchmarks listed in [Table 1](#table1), we seek values in the vector ***x*** that make the following expression as close as possible to an equality.
 
-![image](Axb.png)
+![eq_Axb](figures/Axb.png)
 
 In addition to minimizing ||*A****x*** - ***b***||<sup>2</sup>, we also need to constrain the individual opcode times to be positive (*x<sub>i</sub> > 0* for each *i*). Finally, since CPU times vary more for some benchmarks than others, we normalize the expression by the standard deviation and rewrite the expression as follows:
 
-![image](argmin.png)
+![eq_argmin](figures/argmin.png)
 
 The solution of the above example is:
 
-![image](x.png)
+![eq_x](figures/x.png)
 
 where the values of **x** are given in nanoseconds and the corresponding opcodes are defined as {1: VariableDeclare, 4: PushFalse, 5: PushTrue, 7: PushConstant, 14: Discard, 15: Destruct, 18: Jump, 19: JumpIfFalse,  21: Return, 23: ForRangeInit, 24: ForRangeIterate, 25: ForRangeTerminate, 26: InvokeUserDefinedFreeFunction, 31: JumpIfFalseOrPop, 32: JumpIfTrueOrPop, 33: Not}.
 
